@@ -14,6 +14,7 @@ jobs:
 
     env:
       BASE_VERSION: "6.18"
+      KERNEL_VERSION: "6.18.2"
       CUSTOM_VERSION: "zen2"
       AUFS_REPO: "https://github.com/sfjro/aufs-standalone.git"
       AUFS_BRANCH: "aufs6.18"  # Replace with desired AUFS branch
@@ -35,10 +36,10 @@ jobs:
           
       - name: Download Linux kernel
         run: |
-          wget https://github.com/zen-kernel/zen-kernel/archive/refs/tags/v6.18.2-zen2.tar.gz
-          tar -xf v6.18.2-zen2.tar.gz
-          mv zen-kernel-6.18.2-zen2 linux
-          echo "KERNEL_VERSION=6.18.2" >> $GITHUB_ENV 
+          wget https://github.com/zen-kernel/zen-kernel/archive/refs/tags/v${KERNEL_VERSION}-${CUSTOM_VERSION}.tar.gz
+          tar -xf v${KERNEL_VERSION}-${CUSTOM_VERSION}.tar.gz
+          mv zen-kernel-${KERNEL_VERSION}-${CUSTOM_VERSION} linux
+          
 
           
       - name: Clone AUFS repository
