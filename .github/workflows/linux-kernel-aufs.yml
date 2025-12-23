@@ -14,7 +14,7 @@ jobs:
 
     env:
       BASE_VERSION: "6.18"
-      CUSTOM_VERSION: "opkm"
+      CUSTOM_VERSION: "zen2"
       AUFS_REPO: "https://github.com/sfjro/aufs-standalone.git"
       AUFS_BRANCH: "aufs6.18"  # Replace with desired AUFS branch
       AUFS_PATCH_FILES: "aufs6-kbuild.patch aufs6-base.patch aufs6-mmap.patch aufs6-standalone.patch"
@@ -31,35 +31,13 @@ jobs:
             squashfs-tools wget xz-utils ca-certificates gcc g++ binutils \
             llvm clang kmod python3 curl git jq patch rsync
 
-      - name: Detect latest kernel patch
-        id: detect_kernel
-        run: |
-          set -euo pipefail
-
-          echo "Checking kernel.org releases for base ${BASE_VERSION}..."
-          releases_json="$(curl -sS https://www.kernel.org/releases.json)"
-
-          LATEST=$(printf '%s\n' "$releases_json" \
-            | jq -r --arg base "${BASE_VERSION}." '.releases[]
-                | select(.version | startswith($base))
-                | .version' \
-            | sort -V \
-            | tail -n 1)
-
-          if [ -z "$LATEST" ]; then
-            echo "No patch found. Using base ${BASE_VERSION}"
-            echo "KERNEL_VERSION=$BASE_VERSION" >> $GITHUB_ENV
-          else
-            echo "Detected latest kernel patch: $LATEST"
-            echo "KERNEL_VERSION=$LATEST" >> $GITHUB_ENV
-          fi
-
+      
           
       - name: Download Linux kernel
         run: |
-          wget https://cdn.kernel.org/pub/linux/kernel/v${BASE_VERSION%%.*}.x/linux-$KERNEL_VERSION.tar.xz
-          tar -xf linux-$KERNEL_VERSION.tar.xz
-          mv linux-$KERNEL_VERSION linux
+          wget https://github.com/zen-kernel/zen-kernel/archive/refs/tags/v6.18.2-zen2.tar.gz
+          tar -xf zen-kernel-6.18.2-zen2.tar.gz
+          mv zen-kernel-6.18.2-zen2 linux
 
       - name: Clone AUFS repository
         run: git clone --depth=1 --branch $AUFS_BRANCH $AUFS_REPO aufs
