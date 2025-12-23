@@ -36,8 +36,8 @@ jobs:
       - name: Download Linux kernel
         run: |
           wget https://github.com/zen-kernel/zen-kernel/archive/refs/tags/v6.18.2-zen2.tar.gz
-          tar -xf zen-kernel-6.18.2-zen2.tar.gz
-          mv zen-kernel-6.18.2-zen2 linux
+          tar -xf v6.18.2-zen2.tar.gz
+          mv v6.18.2-zen2 linux
 
       - name: Clone AUFS repository
         run: git clone --depth=1 --branch $AUFS_BRANCH $AUFS_REPO aufs
