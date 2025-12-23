@@ -38,7 +38,7 @@ jobs:
           wget https://github.com/zen-kernel/zen-kernel/archive/refs/tags/v6.18.2-zen2.tar.gz
           tar -xf v6.18.2-zen2.tar.gz
           mv zen-kernel-6.18.2-zen2 linux
-
+          echo "KERNEL_VERSION=6.18.2" >> $GITHUB_ENV 
       - name: Clone AUFS repository
         run: git clone --depth=1 --branch $AUFS_BRANCH $AUFS_REPO aufs
 
