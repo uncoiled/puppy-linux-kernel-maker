@@ -14,7 +14,8 @@ jobs:
 
     env:
       BASE_VERSION: "7.1"
-      CUSTOM_VERSION: "opkm"
+      KERNEL_VERSION: "7.1.8"
+      CUSTOM_VERSION: "zen1"
       TARGET_CPU_ARCH: "x86"
       
       AUFS_REPO: "https://github.com/sfjro/aufs-standalone.git"
