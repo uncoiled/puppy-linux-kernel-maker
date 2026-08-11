@@ -39,23 +39,10 @@ jobs:
         run: |
           set -euo pipefail
 
-          echo "Checking kernel.org releases for base ${BASE_VERSION}..."
-          releases_json="$(curl -sS https://www.kernel.org/releases.json)"
-
-          LATEST=$(printf '%s\n' "$releases_json" \
-            | jq -r --arg base "${BASE_VERSION}." '.releases[]
-                | select(.version | startswith($base))
-                | .version' \
-            | sort -V \
-            | tail -n 1)
-
-          if [ -z "$LATEST" ]; then
-            echo "No patch found. Using base ${BASE_VERSION}"
-            echo "KERNEL_VERSION=$BASE_VERSION" >> $GITHUB_ENV
-          else
-            echo "Detected latest kernel patch: $LATEST"
-            echo "KERNEL_VERSION=$LATEST" >> $GITHUB_ENV
-          fi
+          
+          
+            echo "${KERNEL_VERSION}" >> $GITHUB_ENV
+          
 
           
       - name: Download Linux kernel
