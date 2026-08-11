@@ -47,9 +47,9 @@ jobs:
           
       - name: Download Linux kernel
         run: |
-          wget https://cdn.kernel.org/pub/linux/kernel/v${BASE_VERSION%%.*}.x/linux-$KERNEL_VERSION.tar.xz
-          tar -xf linux-$KERNEL_VERSION.tar.xz
-          mv linux-$KERNEL_VERSION linux
+          wget https://github.com/zen-kernel/zen-kernel/archive/refs/tags/v${KERNEL_VERSION}-${CUSTOM_VERSION}.tar.gz
+          tar -xf v${KERNEL_VERSION}-${CUSTOM_VERSION}.tar.gz
+          mv zen-kernel-${KERNEL_VERSION}-${CUSTOM_VERSION} linux
 
       - name: Clone AUFS repository
         run: git clone --depth=1 --branch $AUFS_BRANCH $AUFS_REPO aufs
