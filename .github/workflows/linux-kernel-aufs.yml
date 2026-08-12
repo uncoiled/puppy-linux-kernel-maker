@@ -34,16 +34,7 @@ jobs:
             squashfs-tools wget xz-utils ca-certificates gcc g++ binutils \
             llvm clang kmod python3 curl git jq patch rsync
 
-      - name: Detect latest kernel patch
-        id: detect_kernel
-        run: |
-          set -euo pipefail
-
-          
-          
-            echo "${KERNEL_VERSION}" >> $GITHUB_ENV
-          
-
+      
           
       - name: Download Linux kernel
         run: |
